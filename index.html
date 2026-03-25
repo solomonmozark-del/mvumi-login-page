@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mvumi.me | Login</title>
+  <meta name="description" content="Secure login page for mvumi.me" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="page-shell">
+    <section class="hero-pane" aria-hidden="true">
+      <div class="mesh"></div>
+      <div class="rings"></div>
+      <div class="hero-content">
+        <p class="tag">MVUMI</p>
+        <h1>Welcome Back</h1>
+        <p>Sign in to continue managing your account securely.</p>
+      </div>
+    </section>
+
+    <section class="form-pane">
+      <div class="card" role="region" aria-labelledby="login-title">
+        <h2 id="login-title">Login</h2>
+        <p class="subtitle">Use your email and password</p>
+
+        <form id="login-form" novalidate>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" placeholder="you@mvumi.me" required />
+
+          <label for="password">Password</label>
+          <div class="password-row">
+            <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required minlength="6" />
+            <button type="button" id="toggle-password" class="ghost-btn" aria-label="Show password">Show</button>
+          </div>
+
+          <div class="row-between">
+            <label class="check">
+              <input type="checkbox" name="remember" />
+              <span>Remember me</span>
+            </label>
+            <a href="#" class="link">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="primary-btn">Sign In</button>
+          <p id="form-message" class="message" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

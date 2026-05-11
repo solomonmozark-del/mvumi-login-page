@@ -3,54 +3,296 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>mvumi.me | Login</title>
-  <meta name="description" content="Secure login page for mvumi.me" />
+  <title>MR Biker Admin | mvumi.me</title>
+  <meta name="description" content="Premium MR Biker superuser command center for live riders, orders, dispatch, pricing, finance and AI agents in Harare, Zimbabwe." />
+  <meta name="theme-color" content="#000000" />
+  <meta property="og:title" content="MR Biker Admin Command Center" />
+  <meta property="og:description" content="A lush, animated dark-mode control center for MR Biker operations." />
+  <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <main class="page-shell">
-    <section class="hero-pane" aria-hidden="true">
-      <div class="mesh"></div>
-      <div class="rings"></div>
-      <div class="hero-content">
-        <p class="tag">MVUMI</p>
-        <h1>Welcome Back</h1>
-        <p>Sign in to continue managing your account securely.</p>
+  <div class="ambient" aria-hidden="true">
+    <span class="orb orb-one"></span>
+    <span class="orb orb-two"></span>
+    <span class="orb orb-three"></span>
+    <span class="grid-glow"></span>
+    <span class="grain"></span>
+  </div>
+
+  <header class="topbar" data-reveal>
+    <a href="#hero" class="brand" aria-label="MR Biker Admin home">
+      <span class="brand-mark">MR</span>
+      <span>
+        <strong>MR Biker</strong>
+        <small>Superuser Admin</small>
+      </span>
+    </a>
+
+    <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="#dashboard">Dashboard</a>
+      <a href="#map">Live Map</a>
+      <a href="#agents">AI Agents</a>
+      <a href="#security">Security</a>
+      <a href="#access" class="nav-cta">Admin Access</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="hero" class="hero section-shell">
+      <div class="hero-copy" data-reveal>
+        <p class="eyebrow"><span class="live-dot"></span> Harare operations live control</p>
+        <h1>Move every parcel with a <span>neon command center.</span></h1>
+        <p class="hero-text">
+          A modern, lush MR Biker admin dashboard for monitoring riders, truck routes,
+          active deliveries, surge zones, AI agents, finance and superuser actions in real time.
+        </p>
+        <div class="hero-actions">
+          <a href="#dashboard" class="btn btn-primary">Explore control center</a>
+          <a href="#access" class="btn btn-ghost">Superuser sign in</a>
+        </div>
+        <div class="trust-strip" aria-label="Admin platform highlights">
+          <span>Clerk protected</span>
+          <span>Supabase realtime</span>
+          <span>Audit logged</span>
+        </div>
+      </div>
+
+      <div class="hero-visual" data-reveal>
+        <div class="phone-frame">
+          <div class="phone-topline"></div>
+          <div class="route-stage" aria-label="Animated MR Biker route preview">
+            <svg viewBox="0 0 420 420" role="img" aria-label="Animated parcel delivery routes through Harare">
+              <defs>
+                <linearGradient id="routeGradient" x1="0" x2="1" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#AADD00" />
+                  <stop offset="100%" stop-color="#ffffff" />
+                </linearGradient>
+                <filter id="glow">
+                  <feGaussianBlur stdDeviation="5" result="coloredBlur" />
+                  <feMerge>
+                    <feMergeNode in="coloredBlur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+              <path class="map-road muted-road" d="M34 287 C112 210 143 243 202 170 S319 78 383 145" />
+              <path class="map-road muted-road delay-two" d="M55 120 C118 164 163 126 231 226 S320 327 383 259" />
+              <path class="map-road hot-road" d="M34 287 C112 210 143 243 202 170 S319 78 383 145" filter="url(#glow)" />
+              <path class="map-road hot-road delay-two" d="M55 120 C118 164 163 126 231 226 S320 327 383 259" filter="url(#glow)" />
+              <circle class="pulse pickup" cx="55" cy="120" r="8" />
+              <circle class="pulse dropoff" cx="383" cy="145" r="8" />
+              <circle class="pulse rider" cx="210" cy="178" r="10" />
+            </svg>
+            <div class="floating-card dispatch-card">
+              <span>Smart Dispatch</span>
+              <strong>Rider ZW-21 assigned</strong>
+              <small>1.8 km to pickup · confidence 94%</small>
+            </div>
+            <div class="floating-card surge-card">
+              <span>Surge Zone</span>
+              <strong>CBD ×1.35</strong>
+              <small>Demand rising near Avondale</small>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="form-pane">
-      <div class="card" role="region" aria-labelledby="login-title">
-        <h2 id="login-title">Login</h2>
-        <p class="subtitle">Use your email and password</p>
+    <section class="metrics section-shell" aria-label="Live MR Biker metrics" data-reveal>
+      <article class="metric-card">
+        <span>Total orders today</span>
+        <strong data-count="248">0</strong>
+        <small>+18% vs yesterday</small>
+      </article>
+      <article class="metric-card">
+        <span>Online riders</span>
+        <strong data-count="73">0</strong>
+        <small>Live across Harare</small>
+      </article>
+      <article class="metric-card">
+        <span>Revenue today</span>
+        <strong data-count="12840" data-prefix="$">0</strong>
+        <small>12% commission tracked</small>
+      </article>
+      <article class="metric-card alert-card">
+        <span>Flagged orders</span>
+        <strong data-count="6">0</strong>
+        <small>Needs superuser review</small>
+      </article>
+    </section>
 
-        <form id="login-form" novalidate>
+    <section id="dashboard" class="dashboard section-shell">
+      <div class="section-heading" data-reveal>
+        <p class="eyebrow">Operations cockpit</p>
+        <h2>Everything a superuser needs, beautifully organized.</h2>
+        <p>Realtime feeds, live dispatch signals, AI agent outputs and audit history are surfaced in one dark-mode command center.</p>
+      </div>
+
+      <div class="cockpit-grid" data-reveal>
+        <article class="glass-panel orders-panel">
+          <div class="panel-head">
+            <div>
+              <span class="panel-kicker">Live orders</span>
+              <h3>Active delivery stream</h3>
+            </div>
+            <button class="chip active">Realtime</button>
+          </div>
+          <div class="order-list">
+            <div class="order-row">
+              <span class="status pending"></span>
+              <div><strong>Avondale → Borrowdale</strong><small>Parcel · 8.4 km · pending rider</small></div>
+              <b>$12.70</b>
+            </div>
+            <div class="order-row">
+              <span class="status active"></span>
+              <div><strong>CBD → Highlands</strong><small>Documents · ETA 14 min</small></div>
+              <b>$8.20</b>
+            </div>
+            <div class="order-row danger-row">
+              <span class="status danger"></span>
+              <div><strong>Msasa → Mbare</strong><small>Flagged parcel risk · review</small></div>
+              <b>$18.60</b>
+            </div>
+          </div>
+        </article>
+
+        <article class="glass-panel agent-feed">
+          <div class="panel-head">
+            <div>
+              <span class="panel-kicker">AI agents</span>
+              <h3>Autonomous decisions</h3>
+            </div>
+            <span class="signal-bars"><i></i><i></i><i></i></span>
+          </div>
+          <div class="agent-timeline">
+            <div><span></span><strong>Dynamic Pricing</strong><small>Fuel check complete · fare +7%</small></div>
+            <div><span></span><strong>Fraud Detection</strong><small>2 orders escalated to support</small></div>
+            <div><span></span><strong>ETA & Delay</strong><small>Sender alerts generated</small></div>
+          </div>
+        </article>
+
+        <article class="glass-panel audit-panel">
+          <div class="panel-head">
+            <div>
+              <span class="panel-kicker">Audit trail</span>
+              <h3>Superuser actions</h3>
+            </div>
+            <span class="lock-pill">Encrypted</span>
+          </div>
+          <div class="audit-log">
+            <p><b>Ban rider</b><span>performed by superuser · 2m ago</span></p>
+            <p><b>Override fare</b><span>order #8F21 · 12m ago</span></p>
+            <p><b>Agent toggled</b><span>Weather Response ON · 18m ago</span></p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="map" class="map-section section-shell">
+      <div class="map-card" data-reveal>
+        <div class="map-toolbar">
+          <div>
+            <p class="eyebrow">Nerve center map</p>
+            <h2>Harare, live and animated.</h2>
+          </div>
+          <div class="filter-pills" role="list" aria-label="Map filters">
+            <button class="chip active">All</button>
+            <button class="chip">Bikes</button>
+            <button class="chip">Gonyeti</button>
+            <button class="chip">Flagged</button>
+          </div>
+        </div>
+        <div class="city-map" aria-label="Stylized live operations map">
+          <div class="map-grid"></div>
+          <span class="map-marker rider-marker" style="--x:22%;--y:38%">🏍</span>
+          <span class="map-marker rider-marker delay" style="--x:72%;--y:28%">🏍</span>
+          <span class="map-marker truck-marker" style="--x:62%;--y:70%">🚛</span>
+          <span class="map-marker order-marker" style="--x:38%;--y:58%">📦</span>
+          <span class="map-marker flagged-marker" style="--x:80%;--y:54%">!</span>
+          <span class="surge-zone zone-one"></span>
+          <span class="surge-zone zone-two"></span>
+          <svg class="animated-routes" viewBox="0 0 900 420" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M80 300 C210 140 330 330 470 180 S690 110 825 230" />
+            <path class="secondary" d="M120 120 C260 210 310 80 460 260 S650 350 780 120" />
+          </svg>
+          <aside class="map-sidepanel">
+            <span>Selected rider</span>
+            <h3>Tafadzwa M.</h3>
+            <p>Online · 4.9 ★ · Honda Ace · 2 active jobs</p>
+            <div class="side-actions"><button>Call</button><button>Assign</button><button>Override</button></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="agents" class="agents section-shell">
+      <div class="section-heading" data-reveal>
+        <p class="eyebrow">Groq + Tavily intelligence</p>
+        <h2>Ten AI agents, visible and controllable.</h2>
+        <p>Monitor the last run, output, status and confidence of each operational agent.</p>
+      </div>
+      <div class="agent-grid" data-reveal>
+        <article><span>01</span><h3>Dynamic Pricing</h3><p>Fuel-aware fares, demand multipliers and rider messaging.</p><button>Trigger</button></article>
+        <article><span>02</span><h3>Smart Dispatch</h3><p>Selects the best rider using proximity, history and live capacity.</p><button>Trigger</button></article>
+        <article><span>03</span><h3>Parcel Risk</h3><p>Flags suspicious descriptions, values and delivery patterns.</p><button>Trigger</button></article>
+        <article><span>04</span><h3>Demand Forecast</h3><p>Predicts hot zones and recommends surge coverage.</p><button>Trigger</button></article>
+      </div>
+    </section>
+
+    <section id="security" class="security section-shell">
+      <div class="security-card" data-reveal>
+        <div>
+          <p class="eyebrow">Protected by design</p>
+          <h2>Superuser-grade access control.</h2>
+          <p>
+            Clerk sessions, Supabase role checks, API bearer secrets and immutable audit logs keep admin tools separated from rider and sender apps.
+          </p>
+        </div>
+        <ul class="security-list">
+          <li><span></span> `/admin/*` protected by admin role</li>
+          <li><span></span> Superuser-only agent and app-control routes</li>
+          <li><span></span> Destructive actions require confirmation</li>
+          <li><span></span> Every action written to `audit_log`</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="access" class="access section-shell">
+      <div class="login-card" data-reveal>
+        <div class="login-art" aria-hidden="true">
+          <span class="scanner"></span>
+          <span class="helmet">🏍</span>
+          <p>MR Biker OS</p>
+        </div>
+        <form id="login-form" class="login-form" novalidate>
+          <p class="eyebrow">Admin access</p>
+          <h2>Enter the control center.</h2>
           <label for="email">Email</label>
-          <input id="email" name="email" type="email" autocomplete="email" placeholder="you@mvumi.me" required />
-
+          <input id="email" name="email" type="email" autocomplete="email" placeholder="superuser@mrbiker.co.zw" required />
           <label for="password">Password</label>
-          <div class="password-row">
-            <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required minlength="6" />
-            <button type="button" id="toggle-password" class="ghost-btn" aria-label="Show password">Show</button>
+          <div class="password-field">
+            <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter secure password" required minlength="6" />
+            <button id="toggle-password" type="button">Show</button>
           </div>
-
-          <div class="row-between">
-            <label class="check">
-              <input type="checkbox" name="remember" />
-              <span>Remember me</span>
-            </label>
-            <a href="#" class="link">Forgot password?</a>
-          </div>
-
-          <button type="submit" class="primary-btn">Sign In</button>
+          <button class="btn btn-primary full" type="submit">Request Clerk session</button>
           <p id="form-message" class="message" aria-live="polite"></p>
         </form>
       </div>
     </section>
   </main>
+
+  <footer class="footer section-shell">
+    <p>© <span id="year"></span> MR Biker · mvumi.me</p>
+    <p>Built for motorcycle and Gonyeti parcel operations in Harare, Zimbabwe.</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>

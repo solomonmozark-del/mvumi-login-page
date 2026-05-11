@@ -1,44 +1,133 @@
+const body = document.body;
+const menuToggle = document.querySelector(".menu-toggle");
+const navLinks = document.querySelectorAll(".nav-links a");
+const revealTargets = document.querySelectorAll("[data-reveal]");
+const counters = document.querySelectorAll("[data-count]");
 const form = document.getElementById("login-form");
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
 const message = document.getElementById("form-message");
 const togglePasswordButton = document.getElementById("toggle-password");
+const year = document.getElementById("year");
 
-togglePasswordButton.addEventListener("click", () => {
-  const isPassword = passwordInput.type === "password";
-  passwordInput.type = isPassword ? "text" : "password";
-  togglePasswordButton.textContent = isPassword ? "Hide" : "Show";
-  togglePasswordButton.setAttribute("aria-label", isPassword ? "Hide password" : "Show password");
+if (year) {
+  year.textContent = new Date().getFullYear();
+}
+
+if (menuToggle) {
+  menuToggle.addEventListener("click", () => {
+    const isOpen = body.classList.toggle("menu-open");
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+  });
+}
+
+navLinks.forEach((link) => {
+  link.addEventListener("click", () => {
+    body.classList.remove("menu-open");
+    menuToggle?.setAttribute("aria-expanded", "false");
+  });
 });
 
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
+const revealObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.18 }
+);
 
-  const email = emailInput.value.trim();
-  const password = passwordInput.value.trim();
+revealTargets.forEach((target) => revealObserver.observe(target));
 
-  message.className = "message";
+const formatCounter = (value, prefix = "") => {
+  if (prefix === "$") return `${prefix}${Math.round(value).toLocaleString()}`;
+  return `${Math.round(value).toLocaleString()}`;
+};
 
-  if (!email || !password) {
-    message.textContent = "Please enter both email and password.";
-    message.classList.add("error");
-    return;
-  }
+const counterObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
 
-  const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  if (!isValidEmail) {
-    message.textContent = "Please enter a valid email address.";
-    message.classList.add("error");
-    return;
-  }
+      const target = entry.target;
+      const finalValue = Number(target.dataset.count || 0);
+      const prefix = target.dataset.prefix || "";
+      const duration = 1400;
+      const start = performance.now();
 
-  if (password.length < 6) {
-    message.textContent = "Password must be at least 6 characters long.";
-    message.classList.add("error");
-    return;
-  }
+      const animate = (now) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        target.textContent = formatCounter(finalValue * eased, prefix);
+        if (progress < 1) requestAnimationFrame(animate);
+      };
 
-  // Replace this with your backend API call.
-  message.textContent = "Login request accepted. Connect this form to your server API.";
-  message.classList.add("success");
-});
+      requestAnimationFrame(animate);
+      counterObserver.unobserve(target);
+    });
+  },
+  { threshold: 0.5 }
+);
+
+counters.forEach((counter) => counterObserver.observe(counter));
+
+if (togglePasswordButton && passwordInput) {
+  togglePasswordButton.addEventListener("click", () => {
+    const isPassword = passwordInput.type === "password";
+    passwordInput.type = isPassword ? "text" : "password";
+    togglePasswordButton.textContent = isPassword ? "Hide" : "Show";
+    togglePasswordButton.setAttribute("aria-label", isPassword ? "Hide password" : "Show password");
+  });
+}
+
+if (form && emailInput && passwordInput && message) {
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const email = emailInput.value.trim();
+    const password = passwordInput.value.trim();
+
+    message.className = "message";
+
+    if (!email || !password) {
+      message.textContent = "Enter your admin email and password to request access.";
+      message.classList.add("error");
+      return;
+    }
+
+    const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if (!isValidEmail) {
+      message.textContent = "Use a valid admin email address.";
+      message.classList.add("error");
+      return;
+    }
+
+    if (password.length < 6) {
+      message.textContent = "Password must be at least 6 characters.";
+      message.classList.add("error");
+      return;
+    }
+
+    message.textContent = "Access flow ready. Connect this static shell to Clerk/Vercel for live authentication.";
+    message.classList.add("success");
+  });
+}
+
+const heroVisual = document.querySelector(".hero-visual");
+const phoneFrame = document.querySelector(".phone-frame");
+
+if (heroVisual && phoneFrame && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  heroVisual.addEventListener("pointermove", (event) => {
+    const bounds = heroVisual.getBoundingClientRect();
+    const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+    const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+    phoneFrame.style.transform = `rotateY(${x * -12 - 5}deg) rotateX(${y * 10 + 4}deg) translateY(-8px)`;
+  });
+
+  heroVisual.addEventListener("pointerleave", () => {
+    phoneFrame.style.transform = "";
+  });
+}

@@ -158,6 +158,21 @@ button {
   box-shadow: var(--glow);
 }
 
+.logo-mark {
+  overflow: hidden;
+  padding: 3px;
+  background: #050704;
+  border: 1px solid rgba(170, 221, 0, 0.32);
+}
+
+.logo-mark img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  border-radius: 11px;
+}
+
 .brand strong,
 .brand small {
   display: block;
@@ -1152,6 +1167,22 @@ h2 span {
   font-size: 2rem;
   font-weight: 900;
   box-shadow: 0 0 52px rgba(170, 221, 0, 0.5);
+}
+
+.logo-core {
+  overflow: hidden;
+  padding: 7px;
+  background: #050704;
+  border: 1px solid rgba(170, 221, 0, 0.45);
+}
+
+.logo-core img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  border-radius: 23px;
+  filter: drop-shadow(0 0 16px rgba(170, 221, 0, 0.28));
 }
 
 .matrix-rain {

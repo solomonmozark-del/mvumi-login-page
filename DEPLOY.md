@@ -1,12 +1,18 @@
-# MR Biker Admin landing shell on mvumi.me
+# MR Biker Admin redirect shell on mvumi.me
 
-This repository now contains a premium static MR Biker admin command-center shell for **mvumi.me**.
+This repository now contains a small static redirect shell for **mvumi.me**.
+
+Visitors are immediately sent to the real API-key protected MR Biker Admin app at:
+
+```txt
+https://mr-biker-admin.vercel.app/
+```
 
 ## What is included
 
-- `index.html` — modern MR Biker admin landing/control-center preview
-- `style.css` — lush dark UI, glassmorphism panels, responsive layout and motion graphics
-- `script.js` — mobile menu, reveal animations, animated counters, password toggle and access-form validation
+- `index.html` — zero-delay meta refresh plus JavaScript redirect to the real admin login
+- `style.css` — retained only for repository history/backward compatibility; no longer loaded by the redirect page
+- `script.js` — retained only for repository history/backward compatibility; no longer loaded by the redirect page
 - `CNAME` — custom domain configuration for `mvumi.me`
 - `.nojekyll` — keeps GitHub Pages from running Jekyll processing
 
@@ -30,22 +36,18 @@ For GitHub Pages root domain hosting, configure these records at the DNS provide
 - `A @ 185.199.111.153`
 - `CNAME www solomonmozark-del.github.io`
 
-## Future production integration
+## Production integration
 
 This static shell intentionally does **not** include real API keys or secrets.
 
-When converting it into the full Next.js MR Biker admin dashboard, use environment variables only:
+The full Next.js MR Biker admin dashboard is deployed separately on Vercel. Configure production secrets in the Vercel project environment only:
 
 ```env
-GROQ_API_KEY=
-TAVILY_API_KEY=
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
-NEXT_PUBLIC_GOOGLE_MAPS_KEY=
-MR_BIKER_SECRET=
-CLERK_SECRET_KEY=
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+MR_BIKER_API_KEY=
+ADMIN_SESSION_SECRET=
 ```
 
 Never commit `.env.local` or any real secret values.

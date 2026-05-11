@@ -266,23 +266,73 @@
     </section>
 
     <section id="access" class="access section-shell">
-      <div class="login-card" data-reveal>
-        <div class="login-art" aria-hidden="true">
-          <span class="scanner"></span>
-          <span class="helmet">🏍</span>
-          <p>MR Biker OS</p>
+      <div class="login-card login-gateway" data-reveal>
+        <div class="login-art gateway-art" aria-hidden="true">
+          <div class="gate-aurora"></div>
+          <div class="security-orb">
+            <span class="scanner scanner-one"></span>
+            <span class="scanner scanner-two"></span>
+            <span class="orbit-dot dot-one"></span>
+            <span class="orbit-dot dot-two"></span>
+            <span class="orbit-dot dot-three"></span>
+            <span class="core-lock">MR</span>
+          </div>
+          <div class="matrix-rain">
+            <span>AUTH</span><span>ROLE</span><span>CLERK</span><span>2FA</span><span>JWT</span>
+          </div>
+          <div class="access-badges">
+            <span>Clerk session</span>
+            <span>Role verified</span>
+            <span>Audit ready</span>
+          </div>
+          <div class="session-preview">
+            <small>Secure gateway</small>
+            <strong>Superuser clearance</strong>
+            <p>Encrypted admin session prepared for Harare operations.</p>
+          </div>
         </div>
-        <form id="login-form" class="login-form" novalidate>
-          <p class="eyebrow">Admin access</p>
-          <h2>Enter the control center.</h2>
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" autocomplete="email" placeholder="superuser@mrbiker.co.zw" required />
-          <label for="password">Password</label>
-          <div class="password-field">
+
+        <form id="login-form" class="login-form gateway-form" novalidate>
+          <p class="eyebrow">Animated admin access</p>
+          <h2>Unlock MR Biker OS.</h2>
+          <p class="form-intro">A lush, motion-first login gateway for superusers, admins and support operators.</p>
+
+          <div class="role-switch" aria-label="Choose admin role">
+            <button class="role-pill active" type="button" data-role="superuser">Superuser</button>
+            <button class="role-pill" type="button" data-role="admin">Admin</button>
+            <button class="role-pill" type="button" data-role="support">Support</button>
+          </div>
+
+          <label for="email">Admin email</label>
+          <div class="field-shell">
+            <span>@</span>
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="superuser@mrbiker.co.zw" required />
+          </div>
+
+          <label for="password">Secure password</label>
+          <div class="password-field field-shell">
+            <span>◆</span>
             <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter secure password" required minlength="6" />
             <button id="toggle-password" type="button">Show</button>
           </div>
-          <button class="btn btn-primary full" type="submit">Request Clerk session</button>
+
+          <div class="password-strength" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+          </div>
+
+          <div class="form-options">
+            <label class="secure-check">
+              <input type="checkbox" name="remember-device" />
+              <span>Trust this secure device</span>
+            </label>
+            <a href="#security">Security policy</a>
+          </div>
+
+          <button class="btn btn-primary full login-submit" type="submit">
+            <span>Request encrypted session</span>
+            <i></i>
+          </button>
+          <div class="auth-progress" aria-hidden="true"><span></span></div>
           <p id="form-message" class="message" aria-live="polite"></p>
         </form>
       </div>

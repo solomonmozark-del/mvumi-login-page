@@ -9,6 +9,9 @@ const passwordInput = document.getElementById("password");
 const message = document.getElementById("form-message");
 const togglePasswordButton = document.getElementById("toggle-password");
 const year = document.getElementById("year");
+const rolePills = document.querySelectorAll(".role-pill");
+const passwordStrength = document.querySelector(".password-strength");
+let selectedRole = "superuser";
 
 if (year) {
   year.textContent = new Date().getFullYear();
@@ -83,6 +86,29 @@ if (togglePasswordButton && passwordInput) {
   });
 }
 
+rolePills.forEach((pill) => {
+  pill.addEventListener("click", () => {
+    selectedRole = pill.dataset.role || "superuser";
+    rolePills.forEach((item) => item.classList.toggle("active", item === pill));
+  });
+});
+
+const getPasswordLevel = (value) => {
+  let score = 0;
+  if (value.length >= 6) score += 1;
+  if (value.length >= 10) score += 1;
+  if (/[A-Z]/.test(value) && /[a-z]/.test(value)) score += 1;
+  if (/\d/.test(value) || /[^A-Za-z0-9]/.test(value)) score += 1;
+  return Math.min(score, 4);
+};
+
+if (passwordInput && passwordStrength) {
+  passwordInput.addEventListener("input", () => {
+    const level = getPasswordLevel(passwordInput.value);
+    passwordStrength.className = `password-strength level-${level}`;
+  });
+}
+
 if (form && emailInput && passwordInput && message) {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -91,6 +117,7 @@ if (form && emailInput && passwordInput && message) {
     const password = passwordInput.value.trim();
 
     message.className = "message";
+    form.classList.remove("is-authenticating");
 
     if (!email || !password) {
       message.textContent = "Enter your admin email and password to request access.";
@@ -111,8 +138,14 @@ if (form && emailInput && passwordInput && message) {
       return;
     }
 
-    message.textContent = "Access flow ready. Connect this static shell to Clerk/Vercel for live authentication.";
-    message.classList.add("success");
+    form.classList.add("is-authenticating");
+    message.textContent = `Checking ${selectedRole} clearance…`;
+
+    window.setTimeout(() => {
+      form.classList.remove("is-authenticating");
+      message.className = "message success";
+      message.textContent = `${selectedRole.charAt(0).toUpperCase() + selectedRole.slice(1)} gateway ready. Connect this shell to Clerk/Vercel for live authentication.`;
+    }, 900);
   });
 }
 
